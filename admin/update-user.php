@@ -1,14 +1,38 @@
-<?php include "header.php"; ?>
+<?php include "header.php";
+
+if (isset($_POST['submit'])) {
+    include "config.php";
+    $user_id = mysqli_real_escape_string ($conn, $_POST['user_id']);
+    $fname = mysqli_real_escape_string ($conn, $_POST['f_name']);
+    $lname = mysqli_real_escape_string ($conn, $_POST['l_name']);
+    $user = mysqli_real_escape_string ($conn, $_POST['username']);
+//    $password = mysqli_real_escape_string ($conn, md5 ($_POST['password']));
+    $role = mysqli_real_escape_string ($conn, $_POST['role']);
+    $sql = "UPDATE user SET first_name ='{$fname}',last_name ='{$lname}', username ='{$user}', role ='{$role}' WHERE user_id = {$user_id} ";
+   // $result = mysqli_query ($conn, $sql) or die("Query Faild");
+
+        if (mysqli_query ($conn, $sql)) {
+            header ("Location: {$hostname}/admin/users.php");
+
+        }
+
+}
+?>
   <div id="admin-content">
       <div class="container">
           <div class="row">
               <div class="col-md-12">
                   <h1 class="admin-heading">Modify User Details</h1>
+                  <p>Enter user ID</p>
               </div>
               <div class="col-md-offset-4 col-md-4">
                   <?php
-                include"config.php";
-                $user_id = $_GET['id'];
+                  include "config.php";
+
+                  $conn=mysqli_connect("localhost","root","","news-site") or die("Connection failed:".mysqli_connect_error());
+                  if (isset($_GET['id'])) {
+
+                $user_id = $_POST['id'];}else $user_id=24;
                   $sql = "SELECT * FROM user WHERE user_id ={$user_id}";
                   $result=mysqli_query($conn,$sql)or die("Query Failed.");
                   if(mysqli_num_rows($result)>0){
@@ -18,7 +42,7 @@
 
                   ?>
                   <!-- Form Start -->
-                  <form  action="" method ="POST">
+                  <form  action="<?php $_SERVER['PHP_SELF'];?>" method ="POST">
                       <div class="form-group">
                           <input type="hidden" name="user_id"  class="form-control" value="<?php echo $row["user_id"]; ?>" placeholder="" >
                       </div>
@@ -50,7 +74,10 @@
                       <input type="submit" name="submit" class="btn btn-primary" value="Update" required />
                   </form>
                   <!-- /Form -->
-                  <?php }} ?>
+                  <?php
+                      }
+                  }
+                  ?>
               </div>
           </div>
       </div>
