@@ -1,3 +1,12 @@
+<?php
+include "config.php";
+session_start ();
+if(isset($_SESSION["username"])){
+
+}
+
+?>
+
 <!doctype html>
 <html>
    <head>
@@ -10,7 +19,7 @@
         <link rel="stylesheet" href="../css/style.css">
     </head>
 
-    <body>
+    <body id="bodyid">
         <div id="wrapper-admin" class="body-content">
             <div class="container">
                 <div class="row">
@@ -27,7 +36,7 @@
                                 <label>Password</label>
                                 <input type="password" name="password" class="form-control" placeholder="" required>
                             </div>
-                            <input type="submit" name="login" class="btn btn-primary" value="login" />
+                            <input id="loginbtn"  type="submit" name="login" class="btn btn-primary" value="login" />
                         </form>
                         <!-- /Form  End -->
                         <?php
@@ -36,7 +45,19 @@
                             $username=$_POST['username'];
                             $username= mysqli_real_escape_string($conn,$_POST['username']);
                             $password=md5($_POST['password']);
-
+                          echo  $sql = "SELECT user_id, username, role FROM user WHERE username='{$username}' AND password='{$password}'";
+                          $result= mysqli_query ($conn,$sql)or die("Query Failed");
+                       if(mysqli_num_rows ($result)>0){
+                        while($row = mysqli_fetch_all ($result)){
+                            session_start ();
+                            $_SESSION["username"]=$row['username'];
+                            $_SESSION["user_id"]=$row['user_id'];
+                            $_SESSION["user_role"]=$row['role'];
+                            header("Location: {$hostname}/admin/post.php");
+                        }
+                       }else{
+                           echo '<div class="alert alert-danger">Username And Password Are Not Matched</div>';
+                       }
                         }
                         ?>
                     </div>

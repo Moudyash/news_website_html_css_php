@@ -1,7 +1,7 @@
 /* ===================== */
 /* COMMOM CSS */
 body{
-    background: #f1f1f1;
+    background: #eeeeee;
     font-family: sans-serif,arial,Helvetica;
 }
 
@@ -420,6 +420,29 @@ i.fa{
 #sidebar .search-post input:focus{
     box-shadow: none;
     border-color: #999;
+}
+#loginbtn{
+    margin-left: 100px;
+    width: 120px;
+    background-color: #ff1e1e;
+}
+#loginbtn:hover{
+font-size: 18px;
+    background-color: #ce1b1b;
+}
+#bodyid {
+    height: 100%;
+    background-color: #ffffff;
+    background-image: url("/images/1.jpg");
+
+    -moz-linear-gradient(60deg, rgba(255, 165, 150, 0.5) 5%, rgba(0, 228, 255, 0.35)), url("../../images/.jpg");
+    -webkit-linear-gradient(60deg, rgba(255, 165, 150, 0.5) 5%, rgba(0, 228, 255, 0.35)), url("../../images/bg.jpg");
+    -ms-linear-gradient(60deg, rgba(255, 165, 150, 0.5) 5%, rgba(0, 228, 255, 0.35)), url("../../images/bg.jpg");
+    linear-gradient(60deg, rgba(255, 165, 150, 0.5) 5%, rgba(0, 228, 255, 0.35)), url("../../images/bg.jpg");
+    background-repeat: no-repeat, no-repeat, no-repeat;
+    background-size: cover, cover, cover, cover;
+    background-position: top left, center center, bottom center;
+    background-attachment: fixed, fixed, fixed;
 }
 
 #sidebar .search-post .btn{

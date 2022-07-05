@@ -1,4 +1,9 @@
 <?php
+if ($_SESSION['user_role'] == '0') {
+    header("Location: {$hostname}/admin/post.php");
+
+}
+
 $hostname="http://localhost/news-site";
 
 $conn=mysqli_connect("localhost","root","","news-site") or die("Connection failed:".mysqli_connect_error());
